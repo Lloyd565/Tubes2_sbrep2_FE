@@ -303,6 +303,66 @@ fieldset {
   display: none;
 }
 
+.btn-download {
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+.tree-area {
+  margin: 14px 0 0;
+  padding: 16px;
+  border-radius: 14px;
+  background-color: #22160d;
+  color: #ffe9d4;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow: auto;
+  min-height: 128px;
+  max-height: 360px;
+}
+
+.tree-node {
+  user-select: none;
+}
+
+.tree-label {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.tree-label:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.tree-toggle {
+  font-size: 10px;
+  color: #8d3d1f;
+  min-width: 14px;
+  flex-shrink: 0;
+}
+
+.tree-tag {
+  color: #ff9d6c;
+  font-weight: 700;
+}
+
+.tree-attr {
+  color: #ffd4a0;
+  opacity: 0.8;
+}
+
+.tree-text {
+  color: #ffe9d4;
+  opacity: 0.55;
+  font-size: 12px;
+}
+
 @media (max-width: 980px) {
   .top-row,
   .main-row,
