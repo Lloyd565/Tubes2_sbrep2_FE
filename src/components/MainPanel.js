@@ -27,7 +27,7 @@ function MainPanel({
   }, [traversalResult]);
 
   let panelContent = (
-    <div className="empty-state">Configure and Tree should appear here..</div>
+    <div className="empty-state">Configure and Tree Display</div>
   );
   let helpPopup = null;
   if (isHelpOpen) {
