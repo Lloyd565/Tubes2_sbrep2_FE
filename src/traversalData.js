@@ -30,6 +30,7 @@ function createFrontendNode(backendNode, nextNodeNumberRef, depth = 0, parentNod
   const rawNodeNumber = getNodeNumber(backendNode, fallbackNodeNumber);
   const nodeId = String(rawNodeNumber);
   const tagName = backendNode.tag || backendNode.name || backendNode.type || 'node';
+  const isTextNode = tagName === '#text';
   const nodeAttributes = backendNode.attributes || backendNode.attrs || {};
   const classNames = getNodeClasses({ ...backendNode, attributes: nodeAttributes });
   const classAttributeText = classNames.join(' ');
@@ -46,6 +47,8 @@ function createFrontendNode(backendNode, nextNodeNumberRef, depth = 0, parentNod
     numericLabel: displayNodeNumber,
     label: backendNode.label || String(rawNodeNumber),
     tag: tagName,
+    isTextNode,
+    textContent: isTextNode ? (backendNode.text || '') : '',
     className: classAttributeText,
     attributes: nodeAttributes,
     depth: backendNode.depth ?? depth,
@@ -144,19 +147,30 @@ function buildTraversalSteps(rootNode, algorithm) {
   const backendMarkedVisitedNodes = orderedNodes.some(treeNode => treeNode.backendVisited);
   let visitedNodes;
   if (backendMarkedVisitedNodes) {
-    visitedNodes = orderedNodes.filter(treeNode => treeNode.backendVisited);
+    visitedNodes = orderedNodes.filter(treeNode => treeNode.backendVisited && !treeNode.isTextNode);
   } else {
-    visitedNodes = orderedNodes;
+    visitedNodes = orderedNodes.filter(treeNode => !treeNode.isTextNode);
   }
 
-  return visitedNodes.map((treeNode, stepIndex) => ({
-    step: stepIndex + 1,
-    nodeId: treeNode.id,
-    nodeLabel: `Node ${treeNode.numericLabel}`,
-    tag: treeNode.tag,
-    status: getStepStatus(treeNode),
-    isMatch: treeNode.isMatch,
-  }));
+  return visitedNodes.map((treeNode, stepIndex) => {
+    let nodeLabel;
+    if (treeNode.isTextNode && treeNode.textContent) {
+      const truncated = treeNode.textContent.length > 18
+        ? treeNode.textContent.slice(0, 18) + '…'
+        : treeNode.textContent;
+      nodeLabel = `"${truncated}"`;
+    } else {
+      nodeLabel = `Node ${treeNode.numericLabel}`;
+    }
+    return {
+      step: stepIndex + 1,
+      nodeId: treeNode.id,
+      nodeLabel,
+      tag: treeNode.tag,
+      status: getStepStatus(treeNode),
+      isMatch: treeNode.isMatch,
+    };
+  });
 }
 
 function getStepStatus(treeNode) {

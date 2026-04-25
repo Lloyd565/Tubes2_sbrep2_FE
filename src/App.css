@@ -695,13 +695,19 @@ textarea:focus {
   cursor: pointer;
 }
 
-.tree-node-circle circle {
+.tree-node-circle circle,
+.tree-node-circle ellipse {
   stroke: rgba(255, 255, 255, 0.92);
   stroke-width: 3;
   filter: drop-shadow(0 8px 10px rgba(26, 38, 64, 0.18));
   transition:
     fill 160ms ease,
     stroke 160ms ease;
+}
+
+.tree-node-circle ellipse {
+  opacity: 0.78;
+  stroke-width: 2;
 }
 
 .tree-node-circle text {
@@ -711,7 +717,14 @@ textarea:focus {
   pointer-events: none;
 }
 
-.tree-node-circle.pending circle {
+.tree-node-circle .text-node-label {
+  font-size: 9px;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.tree-node-circle.pending circle,
+.tree-node-circle.pending ellipse {
   fill: var(--pending);
 }
 
@@ -719,21 +732,25 @@ textarea:focus {
   fill: #667085;
 }
 
-.tree-node-circle.visited circle {
+.tree-node-circle.visited circle,
+.tree-node-circle.visited ellipse {
   fill: var(--visited);
 }
 
-.tree-node-circle.match circle {
+.tree-node-circle.match circle,
+.tree-node-circle.match ellipse {
   fill: var(--primary);
 }
 
-.tree-node-circle.path-highlight circle {
+.tree-node-circle.path-highlight circle,
+.tree-node-circle.path-highlight ellipse {
   fill: var(--path-gold);
   stroke: #fff;
   stroke-width: 4;
 }
 
-.tree-node-circle.current circle {
+.tree-node-circle.current circle,
+.tree-node-circle.current ellipse {
   fill: var(--current);
   stroke: #fff;
   stroke-width: 4;
