@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 392" role="img" aria-labelledby="title desc">
+  <title id="title">sbrep2 tree traversal logo</title>
+  <desc id="desc">A tree graph logo with white branches and a blue highlighted traversal path.</desc>
+  <defs>
+    <style>
+      .white-line,
+      .white-node {
+        fill: none;
+        stroke: #ffffff;
+        stroke-width: 14;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .blue-line,
+      .blue-node {
+        fill: none;
+        stroke: #1da1f2;
+        stroke-width: 14;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .blue-fill {
+        fill: #1da1f2;
+        stroke: #ffffff;
+        stroke-width: 12;
+      }
+    </style>
+  </defs>
+
+  <g class="white-line">
+    <path d="M293 51 L157 162" />
+    <path d="M293 51 L448 162" />
+    <path d="M157 162 L97 274" />
+    <path d="M157 162 L205 275" />
+    <path d="M97 274 L54 374" />
+    <path d="M205 275 L163 373" />
+    <path d="M205 275 L258 373" />
+    <path d="M448 162 L506 273" />
+  </g>
+
+  <g class="white-node">
+    <circle cx="293" cy="51" r="33" />
+    <circle cx="157" cy="162" r="27" />
+    <circle cx="448" cy="162" r="27" />
+    <circle cx="97" cy="274" r="27" />
+    <circle cx="205" cy="275" r="27" />
+    <circle cx="506" cy="273" r="27" />
+    <circle cx="54" cy="374" r="23" />
+    <circle cx="163" cy="373" r="23" />
+    <circle cx="258" cy="373" r="23" />
+  </g>
+
+  <g class="blue-line">
+    <path d="M293 84 L301 162" />
+    <path d="M318 187 L389 270" />
+    <path d="M401 296 L468 373" />
+    <path d="M389 270 L352 374" />
+  </g>
+
+  <g class="blue-node">
+    <circle cx="293" cy="51" r="33" />
+    <circle cx="301" cy="162" r="29" />
+    <circle cx="389" cy="270" r="26" />
+    <circle cx="468" cy="373" r="38" />
+  </g>
+
+  <circle class="white-node" cx="352" cy="374" r="23" />
+  <circle class="blue-fill" cx="468" cy="373" r="28" />
+</svg>
