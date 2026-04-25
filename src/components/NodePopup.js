@@ -21,7 +21,10 @@ function NodePopup({ node, position, onClose }) {
       </button>
       <div><strong>id :</strong> {node.id}</div>
       <div><strong>tag :</strong> {node.tag}</div>
-      <div><strong>attribute :</strong> {attributeText || '-'}</div>
+      {node.isTextNode
+        ? <div><strong>text :</strong> {node.textContent || '-'}</div>
+        : <div><strong>attribute :</strong> {attributeText || '-'}</div>
+      }
     </div>
   );
 }

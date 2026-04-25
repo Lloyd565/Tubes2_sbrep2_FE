@@ -2,6 +2,9 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import NodePopup from './NodePopup';
 
 const NODE_RADIUS = 22;
+const TEXT_NODE_RX = 34;
+const TEXT_NODE_RY = 14;
+const TEXT_NODE_MAX_CHARS = 12;
 const MIN_ZOOM = 0.2;
 const MAX_ZOOM = 2.4;
 const FIT_MAX_ZOOM = 1.05;
@@ -177,6 +180,15 @@ function TreeCanvas({
     if (highlightedPath.nodeIds.has(node.id)) {
       pathClass = ' path-highlight';
     }
+
+    if (node.isTextNode) {
+      const parentNode = node.parentId ? nodeById.get(node.parentId) : null;
+      const parentVisited = parentNode ? stepState.visitedNodeIds.has(parentNode.id) : false;
+      if (parentVisited && parentNode?.isMatch) return `match${pathClass}`;
+      if (parentVisited) return `visited${pathClass}`;
+      return `pending${pathClass}`;
+    }
+
     if (stepState.currentNodeId === node.id) return 'current';
     if (stepState.visitedNodeIds.has(node.id) && node.isMatch) return `match${pathClass}`;
     if (stepState.visitedNodeIds.has(node.id)) return `visited${pathClass}`;
@@ -235,10 +247,23 @@ function TreeCanvas({
                 onNodeFocus(node.id);
               }}
             >
-              <circle r={NODE_RADIUS} />
-              <text textAnchor="middle" dominantBaseline="central">
-                {node.numericLabel}
-              </text>
+              {node.isTextNode ? (
+                <>
+                  <ellipse rx={TEXT_NODE_RX} ry={TEXT_NODE_RY} />
+                  <text textAnchor="middle" dominantBaseline="central" className="text-node-label">
+                    {node.textContent.length > TEXT_NODE_MAX_CHARS
+                      ? node.textContent.slice(0, TEXT_NODE_MAX_CHARS) + '…'
+                      : node.textContent || '#text'}
+                  </text>
+                </>
+              ) : (
+                <>
+                  <circle r={NODE_RADIUS} />
+                  <text textAnchor="middle" dominantBaseline="central">
+                    {node.numericLabel}
+                  </text>
+                </>
+              )}
             </g>
           ))}
         </g>
